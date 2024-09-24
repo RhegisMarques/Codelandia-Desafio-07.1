@@ -113,6 +113,7 @@ function resetBoard() {
 function showWinMessage() {
   winMessage.style.display = 'block';
   gameBoard.classList.add('blur'); // Aplica o desfoque ao game-board
+  
 }
 
 // Reseta o jogo e embaralha novamente as cartas
@@ -123,6 +124,7 @@ function restartGame() {
   cardsArray.sort(() => 0.5 - Math.random());
   createBoard();
 }
+
 
 // Inicializa o jogo
 createBoard();
