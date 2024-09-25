@@ -116,7 +116,7 @@ function showWinMessage() {
   
 }
 
-// Reseta o jogo e embaralha novamente as cartas
+// Reseta o jogo e embaralha novamente as imagens
 function restartGame() {
   winMessage.style.display = 'none';
   gameBoard.classList.remove('blur'); // Remove o desfoque

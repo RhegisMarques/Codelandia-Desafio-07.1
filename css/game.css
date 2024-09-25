@@ -20,7 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #000014;
+  background: var(--dark);
 }
 
 h1 {
@@ -29,7 +29,7 @@ h1 {
   font-weight: 400;
   line-height: 116.72px;
   text-align: left;
-  color: #FFFFFF;
+  color: var(--white);
   margin-bottom: 82px;
   transition: filter 0.3s ease;
 }
