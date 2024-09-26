@@ -1,7 +1,7 @@
 // Seleção de imagens para as cartas
 const img = [
-  '1.svg', '2.svg', '3.svg', '4.svg',
-  '5.svg', '6.svg', '7.svg', '8.svg', '9.svg'
+  '../img/1.svg', '../img/2.svg', '../img/3.svg', '../img/4.svg',
+  '../img/5.svg', '../img/6.svg', '../img/7.svg', '../img/8.svg', '../img/9.svg'
 ];
 
 // Duplicando o array para ter pares de cartas
@@ -26,11 +26,24 @@ function createBoard() {
   cardsArray.forEach((img) => {
     const card = document.createElement('div');
     card.classList.add('card');
-    card.dataset.img = img;
 
+    const cardInner = document.createElement('div');
+    cardInner.classList.add('card-inner');
+
+    const cardFront = document.createElement('div');
+    cardFront.classList.add('card-front');
+    cardFront.innerHTML = '<p>?</p>'; // Exibição da frente da carta
+
+    const cardBack = document.createElement('div');
+    cardBack.classList.add('card-back');
     const cardImage = document.createElement('img');
-    cardImage.src = `./img/${img}`;
-    card.appendChild(cardImage);
+    cardImage.src = `../img/${img}`;
+    cardBack.appendChild(cardImage);
+
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
+    card.dataset.img = img;
 
     card.addEventListener('click', flipCard);
     gameBoard.appendChild(card);
@@ -54,22 +67,6 @@ function flipCard() {
   }
 }
 
-// Função para virar a carta
-function flipCard() {
-  if (lockBoard) return;
-  if (this === firstCard) return;
-
-  this.classList.add('flipped');
-
-  if (!firstCard) {
-    // Primeira carta selecionada
-    firstCard = this;
-  } else {
-    // Segunda carta selecionada
-    secondCard = this;
-    checkForMatch();
-  }
-}
 
 // Verifica se as cartas combinam
 function checkForMatch() {
