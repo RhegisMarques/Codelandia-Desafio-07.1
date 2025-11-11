@@ -19,53 +19,47 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background: var(--dark);
   position: relative;
+  padding: 20px;
 }
 
-
-
 h1 {
-  font-family: Jolly Lodger;
-  font-size: 96px;
+  font-family: "Jolly Lodger";
+  font-size: clamp(48px, 8vw, 96px);
   font-weight: 400;
-  line-height: 116.72px;
-  text-align: left;
+  text-align: center;
   color: var(--white);
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   transition: filter 0.3s ease;
 }
 
 #clickCounter {
-  margin: 10px 0;
-  font-size: 50px;
+  margin: 10px 0 40px 0;
+  font-size: clamp(24px, 5vw, 50px);
   font-weight: bold;
-  color:var(--paper);
-  margin-bottom: 50px;
+  color: var(--paper);
 }
 
 .game-board {
-  display: grid;  
-  grid-template-columns: repeat(6, 155px);
-  grid-template-rows: repeat(3, 155px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
   gap: 10px;
+  max-width: 90vw;
   transition: filter 0.3s ease;
 }
 
 .card {
   width: 100%;
-  height: 100%;
-  perspective: 1000px;  
-  /* Adiciona perspectiva para criar o efeito 3D */
-  
+  aspect-ratio: 1/1;
+  perspective: 1000px;
 }
 
 .card img {
   display: flex;
-  margin: 10px auto ;
+  margin: 10px auto;
   width: 80%;
-  
 }
 
 .card-inner {
@@ -74,12 +68,10 @@ h1 {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
-  /* Suaviza a animação */
 }
 
 .card.flipped .card-inner {
   transform: rotateY(180deg);
-  /* Gira a carta ao clicar */
 }
 
 .card-front,
@@ -88,7 +80,7 @@ h1 {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  /* Oculta o verso da carta enquanto ela vira */
+  border-radius: 10px;
 }
 
 .card-front {
@@ -99,79 +91,97 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   cursor: pointer;
 }
 
 .card-back {
-  background-color: white;
+  background-color: var(--white);
   transform: rotateY(180deg);
-  border-radius: 10px;
 }
 
 .card.matched .card-back {
   background-color: lightgreen;
   cursor: default;
-  border-radius: 10px;
 }
 
-/* Caixa de mensagem de vitória */
 .win-message {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 30px;
-  background-color: #000014;
+  background-color: var(--dark);
   border: 2px solid #333;
   border-radius: 16px;
-  display: none;
   text-align: center;
-
+  max-width: 90vw;
 }
 
-
 .win-message h2 {
-  font-family: Jolly Lodger;
-  font-size: 72px;
+  font-family: "Jolly Lodger";
+  font-size: clamp(40px, 7vw, 72px);
   font-weight: 400;
-  line-height: 87.54px;
-  text-align: center;
-  margin-bottom: 32px;
-  color: var(--white)
+  margin-bottom: 24px;
+  color: var(--white);
 }
 
 .win-message p {
-  width: 500px;
-  font-family: Inter;
-  font-size: 25px;
+  font-family: Inter, sans-serif;
+  font-size: clamp(16px, 3vw, 25px);
   font-weight: 500;
-  line-height: 32px;
-  text-align: center;
-  margin-bottom: 58px;
-  color: var(--white)
+  line-height: 1.4;
+  margin-bottom: 40px;
+  color: var(--white);
 }
 
 .win-message button {
-  padding: 12px 80px;
-  background-color: #8958FF;
-  color: white;
+  padding: 12px 50px;
+  background-color: var(--purple);
+  color: var(--white);
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px;
-  color: var(--white);
-  margin-bottom: 30px;
+  font-size: clamp(16px, 2.5vw, 18px);
+  transition: background 0.3s ease;
 }
 
 .win-message button:hover {
   background-color: #261944;
 }
 
-/* Desfoque aplicado ao game-board quando a mensagem de vitória for exibida */
 .blur {
   filter: blur(10px);
-  /* Aplica o desfoque de 10px */
+}
+
+/* ===============================
+   RESPONSIVIDADE
+   =============================== */
+
+/* Tablets (até 900px) */
+@media (max-width: 900px) {
+  .game-board {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+  }
+}
+
+/* Celulares (até 600px) */
+@media (max-width: 600px) {
+  .game-board {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+    gap: 8px;
+  }
+
+  .card img {
+    width: 70%;
+  }
+
+  .win-message {
+    padding: 20px;
+  }
+
+  .win-message p {
+    max-width: 90%;
+  }
 }
