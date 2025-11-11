@@ -44,17 +44,21 @@ h1 {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 10px;
-  max-width: 90vw;
+  width: 90vw;
+  max-width: 900px;
   transition: filter 0.3s ease;
+  justify-items: center;
 }
 
 .card {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   perspective: 1000px;
 }
+
 
 .card img {
   display: flex;
@@ -162,14 +166,14 @@ h1 {
 /* Tablets (até 900px) */
 @media (max-width: 900px) {
   .game-board {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 }
 
 /* Celulares (até 600px) */
 @media (max-width: 600px) {
   .game-board {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     gap: 8px;
   }
 

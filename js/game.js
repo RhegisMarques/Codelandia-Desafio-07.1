@@ -79,11 +79,9 @@ function updateClickCounter() {
   clickCounter.textContent = `Cliques: ${clickCount}`;
 }
 
-
 // Verifica se as cartas combinam
 function checkForMatch() {
   const isMatch = firstCard.dataset.img === secondCard.dataset.img;
-
   isMatch ? disableCards() : unflipCards();
 }
 
@@ -107,7 +105,6 @@ function unflipCards() {
   setTimeout(() => {
     firstCard.classList.remove('flipped');
     secondCard.classList.remove('flipped');
-
     resetBoard();
   }, 1000);
 }
@@ -120,22 +117,39 @@ function resetBoard() {
 
 // Exibe a mensagem de vitória com a quantidade de cliques
 function showWinMessage() {
-  winMessageParagraph.textContent = `Parabéns! Você encontrou todas as combinações em ${clickCount} cliques, Que tal jogar novamente`; // Atualiza a mensagem
-  winMessage.style.display = 'block';
-  gameBoard.classList.add('blur'); // Aplica o desfoque ao game-board
+  winMessageParagraph.textContent = `Parabéns! Você encontrou todas as combinações em ${clickCount} cliques. Que tal jogar novamente?`;
+
+  // Exibe a mensagem de vitória
+  winMessage.style.display = 'flex';
+  gameBoard.classList.add('blur');
+
+  // Cria o botão de "Voltar ao início" (se ainda não existir)
+  if (!document.getElementById('homeButton')) {
+    const homeButton = document.createElement('button');
+    homeButton.id = 'homeButton';
+    homeButton.textContent = 'Voltar ao Início';
+    homeButton.style.marginTop = '10px';
+    homeButton.addEventListener('click', returnToHome);
+    winMessage.appendChild(homeButton);
+  }
+}
+
+// Função para voltar à tela inicial
+function returnToHome() {
+  // Redireciona para a tela inicial (altere o caminho conforme seu projeto)
+  window.location.href = '../index.html';
 }
 
 // Reseta o jogo e o contador de cliques
 function restartGame() {
   winMessage.style.display = 'none';
-  gameBoard.classList.remove('blur'); // Remove o desfoque
+  gameBoard.classList.remove('blur');
   matches = 0;
-  clickCount = 0; // Reseta o contador de cliques
-  updateClickCounter(); // Atualiza o contador na tela
+  clickCount = 0;
+  updateClickCounter();
   cardsArray.sort(() => 0.5 - Math.random());
   createBoard();
 }
-
 
 // Inicializa o jogo
 createBoard();
